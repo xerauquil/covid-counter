@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import theme from './theme';
