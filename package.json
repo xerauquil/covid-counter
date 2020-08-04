@@ -2,6 +2,7 @@
   "name": "covid-counter",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://xerauquil.github.io/covid-counter/",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
