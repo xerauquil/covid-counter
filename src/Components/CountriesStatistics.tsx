@@ -80,12 +80,17 @@ const CountriesStatistics: React.FC<CountriesStatisticsProps> = (
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
-  const loading = countriesStatistics.loading && globalStatistics.loading;
+  const loading = countriesStatistics.loading || globalStatistics.loading;
   const countryPath = '/country/';
 
 
   return (
-    <Fade in={!loading && !!countriesStatistics.data}>
+    <Fade in={
+      !loading &&
+      !!countriesStatistics.data &&
+      !!globalStatistics.data
+      }
+    >
       <Container className={divContainerClassName}>
         <Paper>
           <Toolbar>

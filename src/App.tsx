@@ -22,7 +22,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <main className={mainClassname}>
-        <Router basename={process.env.PUBLIC_URL}>
+        <Router>
           <Switch>
             <Route path='/' exact>
               <Global />

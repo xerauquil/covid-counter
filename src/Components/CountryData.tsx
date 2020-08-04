@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Container, Grid, Paper, Typography } from '@material-ui/core';
+import { Box, Container, Fade, Grid, Paper, Typography } from '@material-ui/core';
 import { Bar, LinearComponentProps } from 'react-chartjs-2';
 import useCountryTimeline from '../useCountryTimeline';
 import useCountriesStatistics from '../useCountriesStatistics';
@@ -24,6 +24,8 @@ const CountryData: React.FC = () => {
   const countryTimeline = useCountryTimeline(code);
   const countryStatistics = useCountriesStatistics(code);
   
+
+  const loading = countryStatistics.loading || countryTimeline;
 
   // check whether the data has arrived if it hasn't let "timeline" = undefined
   const { timeline } = countryTimeline.data ?? {};
@@ -70,72 +72,74 @@ const CountryData: React.FC = () => {
   [timeline]);
   
   return (
-    <Container maxWidth='lg'>
-      <Typography align='center' variant='h2' component='h1'>
-        {title} Covid-19 statistics
-      </Typography>
-      <Grid container justify='center'>
-        <Grid xs={12} item>
-          <TitledCounter color={colors.Cases} value={totalCases} title='Total Cases' />
+    <Fade in={!loading && !!countryStatistics.data && !!countryTimeline.data}>
+      <Container maxWidth='lg'>
+        <Typography align='center' variant='h2' component='h1'>
+          {title} Covid-19 statistics
+        </Typography>
+        <Grid container justify='center'>
+          <Grid xs={12} item>
+            <TitledCounter color={colors.Cases} value={totalCases} title='Total Cases' />
+          </Grid>
+          <Grid xs={12} item>
+            <TitledCounter color={colors.Deaths} value={totalDeaths} title='Deaths' />
+          </Grid>
+          <Grid xs={12} item>
+            <TitledCounter color={colors.Recovered} value={totalRecovered} title='Recovered' />
+          </Grid>
         </Grid>
-        <Grid xs={12} item>
-          <TitledCounter color={colors.Deaths} value={totalDeaths} title='Deaths' />
-        </Grid>
-        <Grid xs={12} item>
-          <TitledCounter color={colors.Recovered} value={totalRecovered} title='Recovered' />
-        </Grid>
-      </Grid>
-      <Paper>
-        <PreconfiguredTitledGraph
-          data={{
-            datasets: [
-              {
-                label: 'Total Deaths',
-                data: separatedEntries.totalDeathsPerDay,
-                backgroundColor: `${colors.Deaths}CC`,
-                hoverBackgroundColor: colors.Deaths,
-              },
-              {
-                label: 'Total Cases',
-                data: separatedEntries.totalCasesPerDay,
-                backgroundColor: `${colors.Cases}CC`,
-                hoverBackgroundColor: colors.Cases,
-              }
-            ],
-            labels: separatedEntries.dates
-          }}
-          title='Total cases to death ratio.'
-        />
-        <PreconfiguredTitledGraph 
-          title='New Cases Per Day' 
-          data={{
-            datasets: [
-              {
-                label: 'Daily Cases',
-                data: separatedEntries.newCasesPerDay,
-                backgroundColor: '#000000CC',
-                hoverBackgroundColor: colors.Cases
-              },
-            ],
-            labels: separatedEntries.dates
-          }}
-        />
-        <PreconfiguredTitledGraph
-          title='New Deaths Per Day'
-          data={{
-            datasets: [
-              {
-                label: 'Daily Deaths',
-                data: separatedEntries.newDeathsPerDay,
-                backgroundColor: '#000000CC',
-                hoverBackgroundColor: colors.Deaths,
-              },
-            ],
-            labels: separatedEntries.dates
-          }}
-        />
-      </Paper>
-    </Container>
+        <Paper>
+          <PreconfiguredTitledGraph
+            data={{
+              datasets: [
+                {
+                  label: 'Total Deaths',
+                  data: separatedEntries.totalDeathsPerDay,
+                  backgroundColor: `${colors.Deaths}CC`,
+                  hoverBackgroundColor: colors.Deaths,
+                },
+                {
+                  label: 'Total Cases',
+                  data: separatedEntries.totalCasesPerDay,
+                  backgroundColor: `${colors.Cases}CC`,
+                  hoverBackgroundColor: colors.Cases,
+                }
+              ],
+              labels: separatedEntries.dates
+            }}
+            title='Total cases to death ratio.'
+          />
+          <PreconfiguredTitledGraph 
+            title='New Cases Per Day' 
+            data={{
+              datasets: [
+                {
+                  label: 'Daily Cases',
+                  data: separatedEntries.newCasesPerDay,
+                  backgroundColor: '#000000CC',
+                  hoverBackgroundColor: colors.Cases
+                },
+              ],
+              labels: separatedEntries.dates
+            }}
+          />
+          <PreconfiguredTitledGraph
+            title='New Deaths Per Day'
+            data={{
+              datasets: [
+                {
+                  label: 'Daily Deaths',
+                  data: separatedEntries.newDeathsPerDay,
+                  backgroundColor: '#000000CC',
+                  hoverBackgroundColor: colors.Deaths,
+                },
+              ],
+              labels: separatedEntries.dates
+            }}
+          />
+        </Paper>
+      </Container>
+    </Fade>
   );
 };
 
