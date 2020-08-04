@@ -25,7 +25,7 @@ const CountryData: React.FC = () => {
   const countryStatistics = useCountriesStatistics(code);
   
 
-  const loading = countryStatistics.loading || countryTimeline;
+  const loading = countryStatistics.loading || countryTimeline.loading;
 
   // check whether the data has arrived if it hasn't let "timeline" = undefined
   const { timeline } = countryTimeline.data ?? {};
@@ -70,7 +70,8 @@ const CountryData: React.FC = () => {
     return tempObj;
   },
   [timeline]);
-  
+
+
   return (
     <Fade in={!loading && !!countryStatistics.data && !!countryTimeline.data}>
       <Container maxWidth='lg'>
