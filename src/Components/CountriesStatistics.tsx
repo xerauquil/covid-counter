@@ -124,36 +124,36 @@ const CountriesStatistics: React.FC<CountriesStatisticsProps> = (
                         >
                           <TableCell align='left'>
                             <MuiLink component={Link} to={`${countryPath}${country.code}`} color="secondary">
-                              {country.title}
+                              {country.title || ''}
                             </MuiLink>
                           </TableCell>
 
                           <TableCell align='right'>
-                            {country.cases}
+                            {country.cases || ''}
                           </TableCell>
 
                           <TableCell align='right' className={country.newCasesToday > 0 ? classes.yellow : undefined}>
-                            {country.newCasesToday}
+                            {country.newCasesToday ? `+${country.newCasesToday}` : ''}
                           </TableCell>
 
                           <TableCell align='right'>
-                            {country.deaths}
+                            {country.deaths || ''}
                           </TableCell>
 
                           <TableCell align='right' className={country.newDeathsToday > 0 ? classes.red : undefined}>
-                            {country.newDeathsToday}
+                            {country.newDeathsToday ? `+${country.newDeathsToday}` : ''}
                           </TableCell>
 
                           <TableCell align='right' className={country.recovered > 0 ? classes.green : undefined}>
-                            {country.recovered}
+                            {country.recovered || ''}
                           </TableCell>
 
                           <TableCell align='right'>
-                            {country.activeCases}
+                            {country.activeCases || ''}
                           </TableCell>
 
                           <TableCell align='right'>
-                            {country.seriousCases}
+                            {country.seriousCases || ''}
                           </TableCell>
                         </TableRow>
                       ), 
