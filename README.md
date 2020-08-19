@@ -1,3 +1,11 @@
+This project utilizes [The Virus Tracker](https://thevirustracker.com/)'s API in order to provide
+a simple webite where you can quickly check the current covid-19 statistics for any infected
+country worldwide. 
+
+A [live demo](https://xerauquil.github.io/covid-counter/#/) is currently running on github pages.
+
+Insert Create React App Mumbo Jumbo here:
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
