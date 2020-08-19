@@ -25,7 +25,7 @@ const Global: React.FC = () => {
     cases,
     deaths,
     recovered,
-    seriousCases
+    affectedCountries
   } = data ?? {};
 
   return (
@@ -44,7 +44,7 @@ const Global: React.FC = () => {
             <TitledCounter color={colors.Recovered} value={recovered || 0} title="Recovered" />
           </Grid>
           <Grid item sm={6} xs={12}>
-            <TitledCounter color={colors.SeriousCases} value={seriousCases || 0} title="Serious Cases" />
+            <TitledCounter color={colors['Affected Countries']} value={affectedCountries || 0} title="Affected Countries" />
           </Grid>
           <Grid item xs={12}>
             <TitledCounter color={colors.Deaths} value={deaths || 0} title="Deaths" />
